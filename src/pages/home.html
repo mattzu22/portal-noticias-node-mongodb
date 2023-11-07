@@ -1,0 +1,59 @@
+
+    <%- include('partials/header.html') %>
+
+        <section class="noticia-destaque">
+            <div class="center">
+                <div class="img-destaque">
+                    <div class="overlay-destaque"></div>
+                    <div class="title-destaque-descricao">
+                        <!--feito em off o link aqui e adicionado nos estilos-->
+                        <a href="<%= posts[0].slug %>"><h2><%= posts[0].titulo %></h2></a>
+                        <p><%- posts[0].conteudoCurto %>...</p>
+                    </div>
+                    <img src="<%= posts[0].imagem %>" />
+                </div>
+            </div>
+        </section>
+
+        <section class="outras-noticias">
+            <div class="title-outras-noticia">
+                <h2>Últimas Notícias</h2>
+                <br><br>
+                <div class="center">
+                    <div class="ultimas">
+                        <% posts.slice(1).forEach((post) =>{%>   
+                            <div class="box-ultima-single">
+                                <img src="<%= post.imagem %>" />
+                                <div class="conteudo-noticia-single">
+                                <h3><%=  post.categoria %></h3>
+                                <h2><%=  post.titulo %></h2>
+                                <p><%=  post.conteudoCurto %></p>
+                                <a href="<%=  post.slug %>">Saiba mais</a>
+                            </div>
+                            </div>
+                        <%}) %>
+                    </div>
+                    <div class="mais-lidas">
+                        <h3>Mais Lidas</h3>
+                        <div class="mais-lidas-noticias">
+                            <% posts.slice(1).forEach((post)=>{%>
+                               <div class="mais-lida-noticia-single">
+                                <img src="<%= post.imagem %>" />
+                                <div class="texto-mais-lida-single">
+                                    <h4><%= post.titulo %></h4>
+                                    <p><%= post.conteudoCurto %></p>
+                                    <a href="<%= post.slug %>">Saiba mais</a>
+                                </div>
+                            </div>  
+                            <%}) %>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer.html') %>
+
+    </body>
+</html>
