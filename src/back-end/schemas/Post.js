@@ -12,7 +12,8 @@ const postSchema = new Schema(
     conteudo: String,
     slug: String,
     author: String,
-    views: Number
+    views: Number,
+    avatar: String
   },
   { collection: "posts" }
 );

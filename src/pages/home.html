@@ -1,59 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="../../public/reset.css" />
+    <link rel="stylesheet" href="../../public/styles.css" />
+
+    <title>Portal Nord-Dev</title>
+  </head>
+  <body>
     <%- include('partials/header.html') %>
 
-        <section class="noticia-destaque">
-            <div class="center">
-                <div class="img-destaque">
-                    <div class="overlay-destaque"></div>
-                    <div class="title-destaque-descricao">
-                        <!--feito em off o link aqui e adicionado nos estilos-->
-                        <a href="<%= posts[0].slug %>"><h2><%= posts[0].titulo %></h2></a>
-                        <p><%- posts[0].conteudoCurto %>...</p>
-                    </div>
-                    <img src="<%= posts[0].imagem %>" />
-                </div>
+    <section class="main-news">
+      <div class="img-main">
+        <div class="overlay-destaque"></div>
+
+        <div class="author">
+          <img src="<%= posts[0].avatar %>" alt="avatar" />
+          <p>POR <%= posts[0].author %></p>
+        </div>
+
+        <div class="main-info">
+          <a href="<%= posts[0].slug %>"><h2><%= posts[0].titulo %></h2></a>
+          <p><%- posts[0].conteudo.substring(0, 200) %>...</p>
+        </div>
+        <img src="<%= posts[0].imagem %>" />
+      </div>
+    </section>
+
+    <section class="more-news">
+      <h2>Últimas publicações</h2>
+
+      <div class="container-news">
+        <div class="latest-news">
+          <% posts.slice(1).forEach((post) =>{%>
+          <div class="container-latest-news">
+            <img src="<%= post.imagem %>" />
+            <div class="content-new">
+              <h3><%= post.categoria %></h3>
+              <h2><%= post.titulo %></h2>
+              <p><%= post.conteudo.substring(0, 100)%></p>
+              <a href="<%=  post.slug %>">Saiba mais</a>
             </div>
-        </section>
+          </div>
+          <%}) %>
+        </div>
 
-        <section class="outras-noticias">
-            <div class="title-outras-noticia">
-                <h2>Últimas Notícias</h2>
-                <br><br>
-                <div class="center">
-                    <div class="ultimas">
-                        <% posts.slice(1).forEach((post) =>{%>   
-                            <div class="box-ultima-single">
-                                <img src="<%= post.imagem %>" />
-                                <div class="conteudo-noticia-single">
-                                <h3><%=  post.categoria %></h3>
-                                <h2><%=  post.titulo %></h2>
-                                <p><%=  post.conteudoCurto %></p>
-                                <a href="<%=  post.slug %>">Saiba mais</a>
-                            </div>
-                            </div>
-                        <%}) %>
-                    </div>
-                    <div class="mais-lidas">
-                        <h3>Mais Lidas</h3>
-                        <div class="mais-lidas-noticias">
-                            <% posts.slice(1).forEach((post)=>{%>
-                               <div class="mais-lida-noticia-single">
-                                <img src="<%= post.imagem %>" />
-                                <div class="texto-mais-lida-single">
-                                    <h4><%= post.titulo %></h4>
-                                    <p><%= post.conteudoCurto %></p>
-                                    <a href="<%= post.slug %>">Saiba mais</a>
-                                </div>
-                            </div>  
-                            <%}) %>
-                           
-                        </div>
-                    </div>
-                </div>
+        <div class="most-read-news">
+          <h3>AS MAIS LIDAS</h3>
+          <div class="container-read-news">
+            <% mostRead.forEach((post)=>{%>
+            <div class="new-single">
+              <img src="<%= post.imagem %>" />
+              <div class="description">
+                <h4><%= post.titulo %></h4>
+                <p>
+                  <%= post.conteudo.substring(0, 60) %>... -
+                  <span class="views">[<%= post.views %>] views</span>
+                </p>
+                <a href="<%= post.slug %>">Saiba mais</a>
+              </div>
             </div>
-        </section>
+            <%}) %>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <%- include('partials/footer.html') %>
-
-    </body>
+    <%- include('partials/footer.html') %>
+  </body>
 </html>

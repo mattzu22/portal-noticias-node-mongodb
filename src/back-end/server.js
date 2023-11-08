@@ -30,38 +30,46 @@ app.set("view engine", "html");
 app.use("/public", express.static(path.join(__dirname, "../public")));
 app.set("views", path.join(__dirname, "../pages"));
 
-app.get("/", async (req, res) => {
+app.get("/", async(req, res) => {
   const { busca } = req.query;
 
   if (busca == null) {
-    const dataPosts = await Posts.find({})
-      .sort({ _id: -1 })
-      .exec()
-      .then((posts) => {
-       return posts.map((post)=>{
-            return {
-                titulo: post.titulo,
-                imagem: post.imagem,
-                categoria: post.categoria,
-                conteudo: post.conteudo,
-                conteudoCurto: post.conteudo.substring(0, 150),
-                slug: post.slug
-              }
-        }) 
-      });
+    const dataPosts = await Posts.find({}).sort({ _id: -1 }).exec();
 
-    res.render("home", { posts: dataPosts });
+    const dataMostReadPosts = await Posts.find({})
+      .sort({ views: -1 })
+      .limit(3)
+      .exec();
+
+    res.render("home", { posts: dataPosts, mostRead: dataMostReadPosts });
   } else {
-    res.render("busca", {});
+
+    const searchPosts = await Posts.find({titulo: {$regex: busca, $options: "i"}}).then((post) => post);
+    const postLength = searchPosts.length;
+
+    res.render("busca", {posts: searchPosts, postLength: postLength});
   }
 });
 
-app.get("/:slug", (req, res) => {
-    const postSingle = req.params.slug;
-    Posts.findOneAndUpdate({postSingle}, {$inc: { views: 1 }}, {new: true}).then(single =>{
-        console.log(single);
-    })
-  res.render("single", {});
+app.get("/:slug", async (req, res) => {
+  const postSingle = req.params.slug;
+
+  const postDB = await Posts.findOneAndUpdate(
+    { slug: postSingle },
+    { $inc: { views: 1 } },
+    { new: true }
+  ).then((post) => post);
+
+  const dataMostReadPosts = await Posts.find({})
+    .sort({ views: -1 })
+    .limit(3)
+    .exec();
+
+  if (postDB !== null) {
+    res.render("single", { noticia: postDB, mostRead: dataMostReadPosts });
+  } else {
+    res.redirect("/");
+  }
 });
 
 const PORT = 5000;

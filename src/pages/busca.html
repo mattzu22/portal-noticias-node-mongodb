@@ -1,56 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="../../public/reset.css" />
+    <link rel="stylesheet" href="../../public/styles.css" />
+
+    <title>Portal Nord-Dev</title>
+  </head>
+  <body>
     <%- include('partials/header.html') %>
 
-   
-
-    <section class="outras-noticias">
-        <div class="title-outras-noticia">
-            <h2>Busca:</h2>
-            <br><br>
-            <div class="center">
-                
-                <div style="width:100%;" class="mais-lidas">
-                    <h3>33 resultados</h3>
-                    <div class="mais-lidas-noticias">
-                        <div class="mais-lida-noticia-single">
-                            <img src="/public/images/natureza_small.png" />
-                            <div class="texto-mais-lida-single">
-                                <h4>Natureza</h4>
-                                <p>A importância da floresta do ártico para a biodiversidade mundial. Qual o impacto o degelo na fauna e flora?</p>
-                                <a href="/encarar-o-surf">Saiba mais</a>
-                            </div>
-                        </div>
-                        <div class="mais-lida-noticia-single">
-                            <img src="/public/images/natureza_small.png" />
-                            <div class="texto-mais-lida-single">
-                                <h4>Natureza</h4>
-                                <p>A importância da floresta do ártico para a biodiversidade mundial. Qual o impacto o degelo na fauna e flora?</p>
-                                <a href="/encarar-o-surf">Saiba mais</a>
-                            </div>
-                        </div>
-                        <div class="mais-lida-noticia-single">
-                            <img src="/public/images/natureza_small.png" />
-                            <div class="texto-mais-lida-single">
-                                <h4>Natureza</h4>
-                                <p>A importância da floresta do ártico para a biodiversidade mundial. Qual o impacto o degelo na fauna e flora?</p>
-                                <a href="/encarar-o-surf">Saiba mais</a>
-                            </div>
-                        </div>
-                        <div class="mais-lida-noticia-single">
-                            <img src="/public/images/natureza_small.png" />
-                            <div class="texto-mais-lida-single">
-                                <h4>Natureza</h4>
-                                <p>A importância da floresta do ártico para a biodiversidade mundial. Qual o impacto o degelo na fauna e flora?</p>
-                                <a href="/encarar-o-surf">Saiba mais</a>
-                            </div>
-                        </div>
-                    </div>
+    <section class="searched-news-list">
+        <h2>Busca:</h2>
+        <br /><br />
+        <div class="container-searched-news-list">
+          <div style="width: 100%" class="most-read">
+            <h3><%= postLength %> resultados</h3>
+            <div class="mais-lidas-noticias">
+              <% posts.forEach(post => {%>
+              <div class="mais-lida-noticia-single">
+                <img src="<%= post.imagem %>" />
+                <div class="texto-mais-lida-single">
+                  <h4><%= post.titulo %></h4>
+                  <p><%- post.conteudo.substring(0, 150) %>...</p>
+                  <a href="<%= post.slug %>">Saiba mais</a>
                 </div>
+              </div>
+              <%} ) %>
             </div>
+          </div>
         </div>
+    
     </section>
 
     <%- include('partials/footer.html') %>
-
-</body>
+  </body>
 </html>
