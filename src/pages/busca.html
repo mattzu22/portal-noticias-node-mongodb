@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-   <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,6 +20,7 @@
 
     <link rel="stylesheet" href="../../public/reset.css" />
     <link rel="stylesheet" href="../../public/styles.css" />
+    <link rel="stylesheet" href="../../public/search.css" />
 
     <title>Portal Nord-Dev</title>
   </head>
@@ -27,26 +28,26 @@
     <%- include('partials/header.html') %>
 
     <section class="searched-news-list">
-        <h2>Busca:</h2>
-        <br /><br />
-        <div class="container-searched-news-list">
-          <div style="width: 100%" class="most-read">
-            <h3><%= postLength %> resultados</h3>
-            <div class="mais-lidas-noticias">
-              <% posts.forEach(post => {%>
-              <div class="mais-lida-noticia-single">
-                <img src="<%= post.imagem %>" />
-                <div class="texto-mais-lida-single">
-                  <h4><%= post.titulo %></h4>
-                  <p><%- post.conteudo.substring(0, 150) %>...</p>
-                  <a href="<%= post.slug %>">Saiba mais</a>
-                </div>
+      <h2>Busca:</h2>
+
+      <div class="container-searched-news-list">
+        <div class="most-read">
+          <h3><%= postLength %> resultados</h3>
+
+          <div class="most-read-news">
+            <% posts.forEach(post => {%>
+            <div class="most-read-single">
+              <img src="<%= post.imagem %>" />
+              <div class="text">
+                <h4><%= post.titulo %></h4>
+                <p><%- post.conteudo.substring(0, 150) %>...</p>
+                <a href="<%= post.slug %>">Saiba mais</a>
               </div>
-              <%} ) %>
             </div>
+            <%} ) %>
           </div>
         </div>
-    
+      </div>
     </section>
 
     <%- include('partials/footer.html') %>

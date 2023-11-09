@@ -18,22 +18,20 @@
       crossorigin="anonymous"
     />
 
-    <link rel="stylesheet" href="../../public/reset.css" />
-    <link rel="stylesheet" href="../../public/styles.css" />
+    <link rel="stylesheet" href="../public/reset.css" />
+    <link rel="stylesheet" href="../public//styles.css" />
+    <link rel="stylesheet" href="../public/singlenew.css" />
 
     <title>Portal Nord-Dev</title>
   </head>
   <body>
     <%- include('partials/header.html') %>
 
-    <section class="noticia">
-      <div class="center">
-        <div class="noticia-single">
+    <section class="new-details">
+      <div class="container">
+        <div class="new-details-single">
           <h2><%= noticia.titulo %></h2>
-          <div
-            class="autor-nome"
-            style="display: flex; align-items: center; gap: 10px"
-          >
+          <div class="author">
             <img
               style="width: 30px; border-radius: 50%"
               src="<%= noticia.avatar %>"
@@ -43,23 +41,22 @@
           </div>
 
           <img
-            style="width: 100%; margin-top: 10px"
             src="<%= noticia.imagem %>"
             alt=""
           />
           <p><%- noticia.conteudo %></p>
         </div>
-        <div class="mais-lidas">
-          <h3>Mais Lidas</h3>
-          <div class="mais-lidas-noticias">
+        <div class="most-read-news">
+          <h3>AS MAIS LIDAS</h3>
+          <div class="container-read-news">
             <% mostRead.forEach((post)=>{%>
-            <div class="mais-lida-noticia-single">
+            <div class="new-single">
               <img src="<%= post.imagem %>" />
-              <div class="texto-mais-lida-single">
+              <div class="description">
                 <h4><%= post.titulo %></h4>
                 <p>
                   <%= post.conteudo.substring(0, 60) %>... -
-                  <span>[<%= post.views %>]views</span>
+                  <span class="views">[<%= post.views %>] views</span>
                 </p>
                 <a href="<%= post.slug %>">Saiba mais</a>
               </div>

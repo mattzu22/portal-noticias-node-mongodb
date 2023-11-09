@@ -34,7 +34,7 @@ app.get("/", async(req, res) => {
   const { busca } = req.query;
 
   if (busca == null) {
-    const dataPosts = await Posts.find({}).sort({ _id: -1 }).exec();
+    const dataPosts = await Posts.find({}).sort({ _id: -1 }).limit(2).exec();
 
     const dataMostReadPosts = await Posts.find({})
       .sort({ views: -1 })
